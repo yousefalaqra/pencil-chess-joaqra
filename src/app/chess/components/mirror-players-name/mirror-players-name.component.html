@@ -1,0 +1,46 @@
+<ng-container
+  *ngIf="
+    firstPlayer?.playerId == playerId;
+    then firstPlayerNameFirst;
+    else secondPlayerNameFirst
+  "
+></ng-container>
+
+
+<ng-template #firstPlayerNameFirst>
+  <div class="player-tag">
+    <h1>
+      {{ firstPlayer?.playerName }}
+      (YOU)
+      <span
+        class="color"
+        [ngClass]="{ black: firstPlayer?.color == 'black' }"
+      ></span>
+      VS.
+      {{ secondPlayer?.playerName }}
+      <span
+        class="color"
+        [ngClass]="{ black: secondPlayer?.color == 'black' }"
+      ></span>
+    </h1>
+  </div>
+</ng-template>
+
+
+<ng-template #secondPlayerNameFirst>
+  <div class="player-tag">
+    <h1>
+      {{ secondPlayer?.playerName }} (YOU)
+      <span
+        class="color"
+        [ngClass]="{ black: secondPlayer?.color == 'black' }"
+      ></span>
+      VS.
+      {{ firstPlayer?.playerName }}
+      <span
+        class="color"
+        [ngClass]="{ black: firstPlayer?.color == 'black' }"
+      ></span>
+    </h1>
+  </div>
+</ng-template>

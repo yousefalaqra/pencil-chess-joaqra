@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="game">
+    <div class="header">
+      <ng-container [ngSwitch]="gameStatus">
+        <ng-container *ngSwitchCase="0">
+          <ng-container [ngTemplateOutlet]="pendingTemplate"></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="1">
+          <ng-container
+            [ngTemplateOutlet]="playersNamesTemplate"
+          ></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="2">
+          <ng-container
+            [ngTemplateOutlet]="playersNamesTemplate"
+          ></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="3">
+          <ng-container [ngTemplateOutlet]="checkMateTemplate"></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="4">
+          <ng-container [ngTemplateOutlet]="drawMateTemplate"></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="5">
+          <ng-container
+            [ngTemplateOutlet]="rematchRequestTemplate"
+          ></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="6">
+          <ng-container
+            [ngTemplateOutlet]="playersNamesTemplate"
+          ></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="7">
+          <ng-container
+            [ngTemplateOutlet]="playersNamesTemplate"
+          ></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="8">
+          <ng-container
+            [ngTemplateOutlet]="aboundedGameTemplate"
+          ></ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <div class="board">
+      <iframe
+        #chessFrame
+        id="frame"
+        width="100%"
+        height="600"
+        [scrolling]="0"
+        [src]="chessFrameUrl | safe"
+        frameborder="0"
+      >
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<ng-template #pendingTemplate>
+  <h1>{{ firstPlayer.playerName }} (YOU) VS. waiting for player to join ...</h1>
+
+  <h2>Invite your friend</h2>
+  <!-- <div  #elementToCopy class="game-code" >
+
+  </div> -->
+  <input disabled="" class="game-code" type="text" [(ngModel)]="gameKey" />
+  <button [cdkCopyToClipboard]="gameKey" (click)="onCopyCode()" mat-icon-button>
+    <mat-icon>file_copy</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #playersNamesTemplate>
+  <app-mirror-players-name
+    [firstPlayer]="firstPlayer"
+    [secondPlayer]="secondPlayer"
+    [playerId]="playerId"
+    [starter]="starterPlayer"
+  ></app-mirror-players-name>
+</ng-template>
+
+<ng-template #checkMateTemplate>
+  <h1>Checkmate!</h1>
+  <ng-container [ngTemplateOutlet]="actions"></ng-container>
+</ng-template>
+
+<ng-template #drawMateTemplate>
+  <h1>Draw!</h1>
+
+  <ng-container [ngTemplateOutlet]="actions"></ng-container>
+</ng-template>
+
+<ng-template #actions>
+  <div class="actions">
+    <button mat-raised-button (click)="onRematch()" [color]="'accent'">
+      rematch
+    </button>
+    <button mat-raised-button (click)="onLeaveGame()" [color]="">
+      back to home
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #rematchRequestTemplate>
+  <ng-container
+    *ngIf="rematchPLayersIds[0] == playerId; else acceptMatchRequest"
+  >
+    <h1>Waiting for player to accept rematch request ...</h1>
+
+    <div class="actions">
+      <button mat-raised-button (click)="onLeaveGame()" [color]="">
+        cancel (back to home)
+      </button>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #acceptMatchRequest>
+  <h1>Player would like to rematch</h1>
+  <div class="actions">
+    <button mat-raised-button (click)="onRematch()" [color]="'accent'">
+      accept
+    </button>
+    <button mat-raised-button (click)="onLeaveGame()" [color]="">
+      cancel (back to home)
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #aboundedGameTemplate>
+  <h1>Opponent has left the game!</h1>
+  <div class="actions">
+    <button mat-raised-button (click)="onLeaveGame()" [color]="">
+      cancel (back to home)
+    </button>
+  </div>
+</ng-template>

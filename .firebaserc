@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "pencil-chess": {
+      "hosting": {
+        "pencil-chess": [
+          "pencil-chess"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "pencil-chess"
+  }
+}

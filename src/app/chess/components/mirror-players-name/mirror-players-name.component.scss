@@ -1,0 +1,25 @@
+
+.player-tag{
+    display: flex;
+    align-items: center;
+}
+
+.color {
+  display: inline-block;
+
+  width: 20px;
+  height: 20px;
+
+  border: 50%;
+
+  background-color: white;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  margin: 0 20px;
+
+  &.black {
+    background-color: black;
+  }
+
+}

@@ -1,0 +1,29 @@
+<div class="container center">
+  <div class="header center">
+    <div class="title">
+      <h1>Welcome to Pencil Chess!</h1>
+    </div>
+  </div>
+
+  <div class="cards">
+    <mat-card>
+      <div class="center v">
+        <h2>Enter your name</h2>
+
+        <mat-form-field appearance="fill">
+          <mat-label>EX. Chess Hero</mat-label>
+          <input matInput [(ngModel)]="playerName" />
+        </mat-form-field>
+
+        <button
+          (click)="onCreatePlayer()"
+          mat-button
+          color="accent"
+          [disabled]="!playerName"
+        >
+          Next
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

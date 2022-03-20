@@ -1,0 +1,13 @@
+<div class="frame center">
+  <ngx-chess-board
+    #board
+    (moveChange)="onMoveChange($event)"
+    [darkDisabled]="
+      playerColor == 'white' || (playerColor == 'black' && !hasTurn) || boardDisabled
+    "
+    [lightDisabled]="
+      playerColor == 'black' || (playerColor == 'white' && !hasTurn) || boardDisabled
+    "
+    [size]="500"
+  ></ngx-chess-board>
+</div>

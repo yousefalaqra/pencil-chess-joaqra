@@ -1,0 +1,33 @@
+<div class="container center">
+  <div class="cards">
+    <mat-card>
+      <div class="center v card-content">
+        <h2>Start a new game</h2>
+
+        <button (click)="onCreateNewGame()" mat-button color="accent">
+          Start
+        </button>
+      </div>
+    </mat-card>
+
+    <mat-card>
+      <div class="center v">
+        <h2>Join your mate</h2>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Enter game code</mat-label>
+          <input matInput [(ngModel)]="gameCode" />
+        </mat-form-field>
+
+        <button
+          (click)="onJoinGame()"
+          mat-button
+          color="accent"
+          [disabled]="!gameCode"
+        >
+          Join
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>
