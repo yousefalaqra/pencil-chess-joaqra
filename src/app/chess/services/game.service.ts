@@ -166,4 +166,10 @@ export class GameService {
   onRematch(gameKey: string, playerId: string): void {
     this._db.list(`${this.gameDbPath}/${gameKey}/rematch`).push(playerId);
   }
+
+  resetGameRematch(gameKey: string): void {
+    this._db.object<GameModel>(`${this.gameDbPath}/${gameKey}`).update({
+      rematch: [],
+    });
+  }
 }
