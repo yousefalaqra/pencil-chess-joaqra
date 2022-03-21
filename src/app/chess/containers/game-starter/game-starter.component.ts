@@ -18,6 +18,7 @@ export class GameStarterComponent implements OnInit, OnDestroy {
   constructor(private _gameService: GameService, private _router: Router) {}
 
   ngOnInit(): void {
+    localStorage.setItem('setMoves', 'false')
     this.gameKeySubscription = this._gameService.gameKey$.subscribe((x) => {
       if (x) this._router.navigate(['game/board']);
     });

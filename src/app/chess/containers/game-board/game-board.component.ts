@@ -78,7 +78,8 @@ export class GameBoardComponent implements OnInit, OnDestroy, AfterViewInit {
       this.subscriptions.push(
         this._service.getFirstPlayer(this.gameKey).subscribe((player) => {
           if (player) {
-            if(player.leftGame) this._service.updateGameStatus(this.gameKey, GameStatus.abounded)
+            if (player.leftGame)
+              this._service.updateGameStatus(this.gameKey, GameStatus.abounded);
             this.chessIframeWindow.postMessage(
               { for: 'frame', type: MessageType.firstPlayer, payload: player },
               this.chessFrameUrl
@@ -97,7 +98,8 @@ export class GameBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this._service.getSecondPlayer(this.gameKey).subscribe((player) => {
           if (player) {
-            if(player.leftGame) this._service.updateGameStatus(this.gameKey, GameStatus.abounded)
+            if (player.leftGame)
+              this._service.updateGameStatus(this.gameKey, GameStatus.abounded);
             this.chessIframeWindow.postMessage(
               { for: 'frame', type: MessageType.secondPlayer, payload: player },
               this.chessFrameUrl
@@ -183,8 +185,12 @@ export class GameBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
         if (status == GameStatus.toss) this.createToss();
 
-        if (status == GameStatus.checkMate || status == GameStatus.draw)
+        if (status == GameStatus.checkMate || status == GameStatus.draw){
+
+          this._service.resetGameRematch(this.gameKey);
           this.sendDisableBoardMessage();
+
+        }
       }),
 
       this._service.getGameRematch(this.gameKey).subscribe((x) => {
@@ -199,6 +205,8 @@ export class GameBoardComponent implements OnInit, OnDestroy, AfterViewInit {
         if (x.length == 2) {
           this._service.updateGameStatus(this.gameKey, GameStatus.swapColors);
           this.swapPlayersColors();
+
+          
         }
       })
     );
